@@ -1,0 +1,7 @@
+{
+  "name": "AI Voice Agent Clinic Assistant",
+  "description": "A voice-enabled AI assistant to help book clinic appointments and collect patient information in English or Hindi.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
