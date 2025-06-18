@@ -12,6 +12,9 @@ export default defineConfig(({ mode }) => {
         alias: {
           '@': path.resolve(__dirname, '.'),
         }
+      },
+      server: {
+        allowedHosts: ['6d58-47-247-94-67.ngrok-free.app']
       }
     };
 });
