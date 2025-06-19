@@ -30,3 +30,4 @@ VITE_FIREBASE_APP_ID=""
 
 ## Video
 
+ngrok http  http://localhost:5173/

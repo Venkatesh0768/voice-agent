@@ -30,13 +30,22 @@ const SignupPage: React.FC = () => {
       return;
     }
 
-    const success = await auth.signup(name, email, password, role);
-    setIsLoading(false);
-    if (success) {
-      alert(`Signup successful! Please log in as patient.`);
-      navigate('/login');
-    } else {
-      setError('Signup failed. The email might already be in use or an error occurred.');
+    try {
+      const success = await auth.signup(name, email, password, role);
+      setIsLoading(false);
+      if (success) {
+        alert(`Signup successful! Please log in as patient.`);
+        navigate('/login');
+      } else {
+        setError('Signup failed. The email might already be in use or an error occurred.');
+      }
+    } catch (error: any) {
+      setIsLoading(false);
+      if (error.code === 'auth/email-already-in-use') {
+        setError('This email is already in use. Please use a different email or log in.');
+      } else {
+        setError('Signup failed. Please try again.');
+      }
     }
   };
 

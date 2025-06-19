@@ -82,7 +82,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const signup = async (name: string, email: string, pass: string, role: UserRole = UserRole.PATIENT): Promise<boolean> => {
     setIsLoading(true);
     try {
-      const newUser = await firebaseSignUp(email, pass, role);
+      const newUser = await firebaseSignUp(email, pass, role, name);
       if (newUser) {
         const signedInUser = await firebaseSignIn(email, pass);
         if(signedInUser) {
