@@ -3,7 +3,7 @@ import { Language } from "../src/types/types";
 import { HINDI_VOICE_NAME_KEYWORD, ENGLISH_VOICE_NAME_KEYWORD, LanguageNotSupportedByBrowserTTS, SpeechSynthesisNotSupportedMessage } from '../constants';
 
 interface TextToSpeechHook {
-  speak: (text: string, lang: Language) => void;
+  speak: (text: string, lang: Language, rate?: number) => void;
   isSpeaking: boolean;
   isSupported: boolean;
   error: string | null;
@@ -43,12 +43,13 @@ const useTextToSpeech = (): TextToSpeechHook => {
     };
   }, []);
 
-  const speak = useCallback((text: string, lang: Language) => {
+  const speak = useCallback((text: string, lang: Language, rate: number = 1) => {
     if (!isSupported || !text.trim()) return;
 
     setError(null); // Clear previous errors before attempting to speak
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = lang === Language.HINDI ? 'hi-IN' : 'en-US';
+    utterance.rate = rate;
 
     const targetVoiceKeyword = lang === Language.HINDI ? HINDI_VOICE_NAME_KEYWORD : ENGLISH_VOICE_NAME_KEYWORD;
     

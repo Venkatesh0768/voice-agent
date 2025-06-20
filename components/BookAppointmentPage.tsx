@@ -44,6 +44,8 @@ const BookAppointmentPage: React.FC = () => {
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [textInputValue, setTextInputValue] = useState('');
+  const [speechRate, setSpeechRate] = useState(1);
+  const [lastAIMessage, setLastAIMessage] = useState<string | null>(null);
 
   const geminiChatRef = useRef<Chat | null>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
@@ -78,9 +80,10 @@ const BookAppointmentPage: React.FC = () => {
     const language = langOverride ?? selectedLanguage ?? Language.ENGLISH;
     setChatMessages(prev => [...prev, { id: Date.now().toString(), sender, text, timestamp: new Date(), language }]);
     if (sender === 'ai' && ttsIsSupported) {
-      ttsSpeak(text, language);
+      ttsSpeak(text, language, speechRate);
+      setLastAIMessage(text);
     }
-  }, [selectedLanguage, ttsIsSupported, ttsSpeak]);
+  }, [selectedLanguage, ttsIsSupported, ttsSpeak, speechRate]);
 
   const resetConversation = useCallback(() => {
     setFlowState(FlowState.LANGUAGE_SELECTION);
@@ -341,6 +344,17 @@ const BookAppointmentPage: React.FC = () => {
                 <i className="fas fa-paper-plane text-lg"></i>
               </button>
             </form>
+            <div className="flex items-center mt-2 space-x-4">
+              <div className="flex items-center space-x-2">
+                <button type="button" onClick={() => setSpeechRate(Math.max(0.5, speechRate - 0.1))} className="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300">-</button>
+                <span className="font-medium">{speechRate.toFixed(1)}x</span>
+                <button type="button" onClick={() => setSpeechRate(Math.min(2, speechRate + 0.1))} className="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300">+</button>
+                <span className="ml-2 text-xs text-gray-500">AI Speech Speed</span>
+              </div>
+              <button type="button" onClick={() => lastAIMessage && ttsSpeak(lastAIMessage, selectedLanguage ?? Language.ENGLISH, speechRate)} className="ml-4 px-3 py-1 bg-purple-500 text-white rounded hover:bg-purple-600 flex items-center" disabled={!lastAIMessage} title="Repeat last AI message">
+                <i className="fas fa-redo mr-1"></i> Repeat
+              </button>
+            </div>
           </div>
         );
 

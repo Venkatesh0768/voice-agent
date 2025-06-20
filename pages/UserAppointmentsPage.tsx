@@ -69,6 +69,19 @@ const UserAppointmentsPage: React.FC = () => {
     fetchUserAppointments();
   }, [fetchUserAppointments]);
 
+  // Notify user if new appointments are approved
+  useEffect(() => {
+    if (!isLoading && appointments.length > 0) {
+      const approved = appointments.filter(a => a.status === 'APPROVED').map(a => a.id);
+      const seen = JSON.parse(localStorage.getItem('seenApprovedAppointments') || '[]');
+      const newApprovals = approved.filter(id => !seen.includes(id));
+      if (newApprovals.length > 0) {
+        alert('One or more of your appointments have been approved!');
+      }
+      localStorage.setItem('seenApprovedAppointments', JSON.stringify(approved));
+    }
+  }, [isLoading, appointments]);
+
   const renderContent = () => {
     if (isLoading) {
       return (
