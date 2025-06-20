@@ -135,7 +135,7 @@ const AdminDashboardPage: React.FC = () => {
   };
 
   return (
-    <div className="container mx-auto p-4 sm:p-6 lg:p-8 flex-grow">
+    <div className="container mx-auto p-4 sm:p-6 lg:p-8 flex-grow max-h-[80vh] overflow-y-auto">
       <h1 className="text-3xl font-bold text-gray-900 mb-8 text-center">Admin Dashboard</h1>
       {renderContent()}
     </div>

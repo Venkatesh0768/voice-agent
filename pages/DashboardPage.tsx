@@ -15,8 +15,8 @@ const DashboardPage: React.FC = () => {
   const { name, role } = auth.currentUser;
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 overflow-y-auto">
-      <div className="w-full px-2 sm:px-4 py-8">
+    <div className="min-h-screen w-full bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
+      <div className="w-full px-2 sm:px-4 py-8 max-h-[85vh] overflow-y-auto">
         <header className="mb-8 sm:mb-10 text-center">
           <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-pink-500 to-sky-500 drop-shadow-lg mb-2">
             Welcome{auth.currentUser?.name ? `, ${auth.currentUser.name}` : ","}!

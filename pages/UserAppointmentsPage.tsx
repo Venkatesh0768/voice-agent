@@ -109,9 +109,8 @@ const UserAppointmentsPage: React.FC = () => {
   };
 
   return (
-    // SCROLL FIX: Removed 'overflow-y-auto'. The page will now scroll naturally.
     <div className="min-h-screen w-full bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-100">
-      <div className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+      <div className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 max-h-[85vh] overflow-y-auto">
         <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8 text-center">My Appointments</h1>
         {renderContent()}
       </div>
