@@ -1,4 +1,4 @@
-import { User, AppointmentTicket } from '../types';
+import { User, AppointmentTicket } from '../src/types/types';
 
 // Keep keys consistent but their usage changes
 export const LOCAL_STORAGE_USER_KEY = 'clinicCurrentUser_v2';

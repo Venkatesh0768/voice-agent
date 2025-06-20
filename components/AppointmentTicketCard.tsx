@@ -29,10 +29,10 @@ const AppointmentTicketCard: React.FC<AppointmentTicketCardProps> = ({
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300">
-      <div className="flex justify-between items-start mb-4">
+    <div className="bg-white p-4 sm:p-6 rounded-lg shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-2 sm:gap-0">
         <div>
-          <h2 className="text-xl font-semibold text-indigo-700">Appointment Details</h2>
+          <h2 className="text-lg sm:text-xl font-semibold text-indigo-700">Appointment Details</h2>
           <p className="text-xs text-gray-500">Ticket ID: {ticket.id}</p>
         </div>
         <span className={`px-3 py-1 text-xs font-semibold rounded-full ${getStatusClass(ticket.status)}`}>
@@ -40,7 +40,7 @@ const AppointmentTicketCard: React.FC<AppointmentTicketCardProps> = ({
         </span>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-3 text-sm text-gray-700 mb-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2 sm:gap-x-6 sm:gap-y-3 text-sm text-gray-700 mb-4">
         <p><strong className="font-medium text-gray-900">Name:</strong> {ticket.patientData.name || 'N/A'}</p>
         <p><strong className="font-medium text-gray-900">Age:</strong> {ticket.patientData.age || 'N/A'}</p>
         <p><strong className="font-medium text-gray-900">Gender:</strong> {ticket.patientData.gender || 'N/A'}</p>
@@ -55,11 +55,11 @@ const AppointmentTicketCard: React.FC<AppointmentTicketCardProps> = ({
 
       <div className="text-xs text-gray-500 mt-4 border-t pt-3">
         <p>Please arrive 15 minutes before your scheduled time.</p>
-        {ticket.language === Language.HINDI && <p>कृपया अपने निर्धारित समय से 15 मिनट पहले पहुंचें।</p>}
+        {ticket.language === Language.HINDI && <p>कृपया अपने निर्धारित समय से 15 मिनट पहले पहुँचें।</p>}
       </div>
 
       {showAdminActions && onApprove && onReject && ticket.status === AppointmentStatus.PENDING && (
-        <div className="mt-4 pt-4 border-t flex space-x-2 justify-end">
+        <div className="mt-4 pt-4 border-t flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 justify-end">
           <button
             onClick={() => onApprove(ticket.id)}
             className="px-4 py-2 text-xs font-medium text-white bg-green-600 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"

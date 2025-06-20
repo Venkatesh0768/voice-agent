@@ -15,67 +15,76 @@ const DashboardPage: React.FC = () => {
   const { name, role } = auth.currentUser;
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <header className="mb-10 text-center">
-        <h1 className="text-4xl font-bold tracking-tight text-slate-800">Welcome, {name}!</h1>
-        <p className="text-xl text-slate-600 mt-2">
-          {role === UserRole.ADMIN ? "Admin Dashboard" : "Your Health Dashboard"}
-        </p>
-      </header>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-        <OptionCard
-          icon="fas fa-calendar-plus"
-          title="Book New Appointment"
-          description="Schedule a new visit with our voice-guided system."
-          onClick={() => navigate('/book-appointment')}
-          color="sky"
-        />
-        <OptionCard
-          icon="fas fa-tasks"
-          title="My Appointments"
-          description="View and manage your upcoming and past appointments."
-          onClick={() => navigate('/my-appointments')}
-          color="green"
-        />
-        
-        {role === UserRole.ADMIN && (
-          <OptionCard
-            icon="fas fa-user-shield"
-            title="Admin Panel"
-            description="Manage all appointments, users, and system settings."
-            onClick={() => navigate('/admin')}
-            color="red"
-          />
-        )}
-
-        <OptionCard
-          icon="fas fa-file-pdf"
-          title="Chat with PDF"
-          description="Get insights from medical documents."
-          onClick={() => alert('Chat with PDF feature is coming soon!')}
-          color="purple"
-          disabled
-        />
-         <OptionCard
-          icon="fas fa-user-cog"
-          title="Profile Settings"
-          description="Update your personal information and preferences."
-          onClick={() => alert('Profile Settings feature is coming soon!')}
-          color="yellow"
-          disabled
-        />
-      </div>
-       <footer className="mt-16 text-center text-slate-500 text-sm">
+    <div className="min-h-screen w-full bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 overflow-y-auto">
+      <div className="w-full px-2 sm:px-4 py-8">
+        <header className="mb-8 sm:mb-10 text-center">
+          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-pink-500 to-sky-500 drop-shadow-lg mb-2">
+            Welcome{auth.currentUser?.name ? `, ${auth.currentUser.name}` : ","}!
+          </h1>
+          <p className="text-lg sm:text-2xl text-slate-700 font-medium shadow-sm bg-white/60 rounded px-4 py-2 inline-block">
+            {role === UserRole.ADMIN ? "Admin Dashboard" : "Your Health Dashboard"}
+          </p>
+        </header>
+        <section className="w-full max-w-6xl mx-auto bg-white/80 rounded-2xl shadow-xl p-4 sm:p-8 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <OptionCard
+              icon="fas fa-calendar-plus"
+              iconBg="bg-sky-100 text-sky-500"
+              title="Book New Appointment"
+              description="Schedule a new visit with our voice-guided system."
+              onClick={() => navigate('/book-appointment')}
+              color="sky"
+            />
+            <OptionCard
+              icon="fas fa-tasks"
+              iconBg="bg-green-100 text-green-500"
+              title="My Appointments"
+              description="View and manage your upcoming and past appointments."
+              onClick={() => navigate('/my-appointments')}
+              color="green"
+            />
+            {role === UserRole.ADMIN && (
+              <OptionCard
+                icon="fas fa-user-shield"
+                iconBg="bg-red-100 text-red-500"
+                title="Admin Panel"
+                description="Manage all appointments, users, and system settings."
+                onClick={() => navigate('/admin')}
+                color="red"
+              />
+            )}
+            <OptionCard
+              icon="fas fa-file-pdf"
+              iconBg="bg-purple-100 text-purple-500"
+              title="Chat with PDF"
+              description="Get insights from medical documents."
+              onClick={() => alert('Chat with PDF feature is coming soon!')}
+              color="purple"
+              disabled
+            />
+            <OptionCard
+              icon="fas fa-user-cog"
+              iconBg="bg-yellow-100 text-yellow-500"
+              title="Profile Settings"
+              description="Update your personal information and preferences."
+              onClick={() => alert('Profile Settings feature is coming soon!')}
+              color="yellow"
+              disabled
+            />
+          </div>
+        </section>
+        <footer className="mt-8 text-center text-slate-400 text-xs sm:text-sm pb-4">
           <p>&copy; {new Date().getFullYear()} Clinic AI Assistant. All rights reserved.</p>
-          <p>Powered by Gemini AI</p>
+          <p className="mt-1">Powered by <span className="font-semibold text-indigo-500">Gemini AI</span></p>
         </footer>
+      </div>
     </div>
   );
 };
 
 interface OptionCardProps {
   icon: string;
+  iconBg?: string;
   title: string;
   description: string;
   onClick: () => void;
@@ -83,16 +92,15 @@ interface OptionCardProps {
   disabled?: boolean;
 }
 
-const OptionCard: React.FC<OptionCardProps> = ({ icon, title, description, onClick, color, disabled }) => {
-  const baseClasses = "bg-white p-6 rounded-xl shadow-lg border border-gray-200 transition-all duration-300 ease-in-out";
-  const hoverClasses = disabled ? "opacity-60 cursor-not-allowed" : `hover:shadow-xl hover:scale-105 group hover:border-${color}-500`;
-  
+const OptionCard: React.FC<OptionCardProps> = ({ icon, iconBg = '', title, description, onClick, color, disabled }) => {
+  const baseClasses = "bg-white p-6 rounded-2xl shadow-lg border border-gray-200 transition-all duration-300 ease-in-out";
+  const hoverClasses = disabled ? "opacity-60 cursor-not-allowed" : `hover:shadow-2xl hover:scale-105 group hover:border-${color}-400`;
   const colorVariants = {
-    sky: { icon: 'text-sky-500', border: 'border-sky-500', button: 'text-sky-600 hover:text-sky-700' },
-    purple: { icon: 'text-purple-500', border: 'border-purple-500', button: 'text-purple-600 hover:text-purple-700' },
-    green: { icon: 'text-green-500', border: 'border-green-500', button: 'text-green-600 hover:text-green-700' },
-    red: { icon: 'text-red-500', border: 'border-red-500', button: 'text-red-600 hover:text-red-700' },
-    yellow: { icon: 'text-yellow-500', border: 'border-yellow-500', button: 'text-yellow-600 hover:text-yellow-700' },
+    sky: { button: 'text-sky-600 hover:text-sky-700' },
+    purple: { button: 'text-purple-600 hover:text-purple-700' },
+    green: { button: 'text-green-600 hover:text-green-700' },
+    red: { button: 'text-red-600 hover:text-red-700' },
+    yellow: { button: 'text-yellow-600 hover:text-yellow-700' },
   };
   const selectedColor = colorVariants[color];
 
@@ -100,19 +108,19 @@ const OptionCard: React.FC<OptionCardProps> = ({ icon, title, description, onCli
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`${baseClasses} ${hoverClasses} flex flex-col items-start text-left`}
+      className={`${baseClasses} ${hoverClasses} flex flex-col items-start text-left group w-full h-full`}
       aria-label={`Action: ${title}`}
     >
-      <div className={`p-3 mb-4 rounded-full bg-slate-100 group-hover:bg-slate-200 transition-colors ${selectedColor.icon}`}>
-        <i className={`${icon} text-3xl w-8 h-8 text-center`}></i>
+      <div className={`p-4 mb-4 rounded-full ${iconBg} shadow-sm flex items-center justify-center text-3xl`}>
+        <i className={`${icon}`}></i>
       </div>
-      <h2 className="text-xl font-semibold mb-2 text-slate-800">{title}</h2>
+      <h2 className="text-lg sm:text-xl font-bold mb-2 text-slate-800 group-hover:text-black transition-colors">{title}</h2>
       <p className="text-slate-600 text-sm mb-4 flex-grow">{description}</p>
       {!disabled && (
-          <span className={`mt-auto text-sm font-semibold ${selectedColor.button} group-hover:underline transition-colors`}>
-            Proceed <i className="fas fa-arrow-right ml-1 text-xs"></i>
-          </span>
-        )}
+        <span className={`mt-auto text-sm font-semibold ${selectedColor.button} group-hover:underline transition-colors flex items-center`}>
+          Proceed <i className="fas fa-arrow-right ml-1 text-xs"></i>
+        </span>
+      )}
     </button>
   );
 };

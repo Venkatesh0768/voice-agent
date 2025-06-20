@@ -325,18 +325,20 @@ const BookAppointmentPage: React.FC = () => {
       case FlowState.AWAITING_DETAILS_CONFIRMATION:
       case FlowState.AWAITING_APPOINTMENT_TIME:
         return (
-          <div className="flex flex-col bg-gray-50 border border-gray-200 rounded-lg shadow-lg overflow-hidden max-h-[calc(100vh-250px)]">
-            <div ref={chatContainerRef} className="flex-grow overflow-y-auto p-4 space-y-4 bg-white min-h-0">
-              {chatMessages.map((message) => (<ChatBubble key={message.id} message={message} />))}
+          <div className="flex flex-col flex-grow bg-white/90 rounded-2xl shadow-xl p-2 sm:p-6 mt-4 mb-2 overflow-y-auto min-h-[300px] max-h-[70vh] w-full">
+            <div ref={chatContainerRef} className="flex flex-col space-y-2 w-full overflow-y-auto flex-grow min-h-[200px]">
+              {chatMessages.map((msg) => (
+                <ChatBubble key={msg.id} message={msg} />
+              ))}
               {isLoadingAI && <AiTypingIndicator />}
             </div>
-            <form onSubmit={handleTextInputFormSubmit} className="flex items-center p-4 bg-gray-100 border-t border-gray-200 flex-shrink-0">
-              <input type="text" value={textInputValue} onChange={(e) => setTextInputValue(e.target.value)} placeholder="Type your message..." className="flex-grow px-4 py-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500 text-base" disabled={isLoadingAI || ttsIsSpeaking} />
-              <button type="submit" className="ml-3 bg-indigo-600 text-white p-3.5 rounded-full shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 transition-colors" disabled={isLoadingAI || ttsIsSpeaking || textInputValue.trim() === ''} title="Send message">
-                <i className="fas fa-paper-plane text-lg"></i>
-              </button>
-              <button type="button" onClick={handleMicrophoneToggle} className={`ml-2 p-3.5 rounded-full shadow-md transition-colors focus:outline-none focus:ring-2 focus:ring-sky-500 ${isListening ? 'bg-red-500 text-white hover:bg-red-600' : 'bg-sky-500 text-white hover:bg-sky-600'}`} disabled={isLoadingAI || ttsIsSpeaking || !sttIsSupported} title={isListening ? "Stop listening" : "Start listening"}>
+            <form onSubmit={handleTextInputFormSubmit} className="w-full max-w-full flex items-center bg-gray-100 border-t border-gray-200 flex-shrink-0 rounded-b-2xl overflow-hidden">
+              <input type="text" value={textInputValue} onChange={(e) => setTextInputValue(e.target.value)} placeholder="Type your message..." className="flex-grow min-w-0 px-4 py-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500 text-base bg-white" disabled={isLoadingAI || ttsIsSpeaking} />
+              <button type="button" onClick={handleMicrophoneToggle} className={`ml-2 p-3.5 rounded-full shadow-md transition-colors focus:outline-none focus:ring-2 focus:ring-sky-500 shrink-0 ${isListening ? 'bg-red-500 text-white hover:bg-red-600' : 'bg-sky-500 text-white hover:bg-sky-600'}`} disabled={isLoadingAI || ttsIsSpeaking || !sttIsSupported} title={isListening ? "Stop listening" : "Start listening"}>
                 <i className={`fas ${isListening ? 'fa-microphone-slash' : 'fa-microphone'} text-lg`}></i>
+              </button>
+              <button type="submit" className="ml-2 bg-indigo-600 text-white p-3.5 rounded-full shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 transition-colors shrink-0" disabled={isLoadingAI || ttsIsSpeaking || textInputValue.trim() === ''} title="Send message">
+                <i className="fas fa-paper-plane text-lg"></i>
               </button>
             </form>
           </div>
@@ -358,8 +360,10 @@ const BookAppointmentPage: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col flex-grow w-full max-w-3xl mx-auto p-4 sm:p-6 lg:p-8">
-      {renderContent()}
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-100 flex flex-col items-center px-2 sm:px-6 md:px-12 py-4 sm:py-8">
+      <div className="flex flex-col flex-grow w-full max-w-3xl mx-auto p-4 sm:p-6 lg:p-8">
+        {renderContent()}
+      </div>
       <Modal isOpen={showErrorModal} onClose={() => setShowErrorModal(false)} title="Error">
         <p className="text-red-600 text-center text-lg">{errorMessage}</p>
         <button onClick={() => setShowErrorModal(false)} className="mt-4 px-6 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors">Close</button>

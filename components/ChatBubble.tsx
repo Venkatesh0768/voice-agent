@@ -13,9 +13,9 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({ message }) => {
   const langLabel = message.language === Language.HINDI ? ' (हिन्दी)' : message.language === Language.ENGLISH ? ' (English)' : '';
 
   // Base classes for all bubbles
-  let bubbleBaseClasses = 'break-words transition-all duration-200 ease-in-out px-4 py-2 text-base rounded-lg';
-  let wrapperClasses = 'w-full flex my-2'; // Increased vertical margin
-  let timestampClasses = 'text-xs mt-1.5 opacity-80';
+  let bubbleBaseClasses = 'break-words transition-all duration-200 ease-in-out px-3 sm:px-4 py-2 text-sm sm:text-base rounded-lg';
+  let wrapperClasses = 'w-full flex my-1.5 sm:my-2'; // Responsive vertical margin
+  let timestampClasses = 'text-xs mt-1 opacity-80';
 
   if (isUser) {
     bubbleBaseClasses += ' bg-indigo-600 text-white ml-auto rounded-br-none'; // User bubbles on right, no bottom-right radius

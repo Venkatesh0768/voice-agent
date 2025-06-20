@@ -20,7 +20,7 @@ const App: React.FC = () => {
       <HashRouter>
         <div className="min-h-screen bg-gray-50 flex flex-col">
           <Navbar />
-          <main className="flex-grow h-[calc(100vh-64px)]">
+          <main className="flex-grow">
             <Routes>
               <Route path="/" element={<LandingPage />} />
               <Route path="/login" element={<LoginPage />} />
