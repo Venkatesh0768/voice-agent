@@ -15,24 +15,24 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 // Initialize App Check
-// During development, you can use a debug token.
-// For production, you would configure a reCAPTCHA v3 provider.
+// During development, use a debug token, for production skip App Check
+// This prevents the token-related errors in production
 if (import.meta.env.DEV) { // Only enable for development
   (self as any).FIREBASE_APPCHECK_DEBUG_TOKEN = "1E47C2B7-5798-45C1-A98A-5A59FC23B2C3";
+  
+  initializeAppCheck(app, {
+    provider: new CustomProvider({
+      getToken: async () => {
+        // For debug tokens, we just return the hardcoded token
+        return { token: (self as any).FIREBASE_APPCHECK_DEBUG_TOKEN as string, expireTimeMillis: Date.now() + 3600 * 1000 };
+      },
+    }),
+    isTokenAutoRefreshEnabled: true
+  });
 }
-
-initializeAppCheck(app, {
-  provider: new CustomProvider({
-    getToken: async () => {
-      // For debug tokens, we just return the hardcoded token
-      return { token: (self as any).FIREBASE_APPCHECK_DEBUG_TOKEN as string, expireTimeMillis: Date.now() + 3600 * 1000 };
-    },
-  }),
-  isTokenAutoRefreshEnabled: true
-});
 
 // Initialize Firebase services
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 
-export default app; 
+export default app;
