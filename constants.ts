@@ -1,7 +1,4 @@
-export const GEMINI_MODEL_NAME = "gemini-2.5-flash-preview-04-17"; // General text tasks
-// export const GEMINI_API_KEY = process.env.API_KEY; // This will be accessed directly via process.env.API_KEY in service
-
-// Removed BASE_API_URL as there is no backend.
+export const GEMINI_MODEL_NAME = "gemini-1.5-flash";
 
 export const INITIAL_SYSTEM_PROMPT_ENGLISH = `You are a friendly and professional AI assistant for a clinic. Your goal is to collect patient information for an appointment.
 You must collect the following information:
