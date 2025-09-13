@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { User, UserRole } from '../src/types/types';
-import { auth } from '../config/firebase';
+import { auth } from '../../firebaseConfig.js';
 import { signIn, signUp, signOutUser, fetchUserData } from '../services/firebaseService';
 import { onAuthStateChanged } from 'firebase/auth';
 
@@ -121,4 +121,4 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       {!loading && children}
     </AuthContext.Provider>
   );
-}; 
+};

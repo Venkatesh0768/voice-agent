@@ -2,6 +2,7 @@ import React, { createContext, useState, useEffect, ReactNode } from 'react';
 import { User, AuthContextType, UserRole } from '../src/types/types';
 import { saveAuthSession, getAuthSession, clearAuthSession } from '../services/localStorageService';
 import { signUp as firebaseSignUp, signIn as firebaseSignIn, signOutUser as firebaseSignOut } from '../src/services/firebaseService';
+import { auth } from '../firebaseConfig.js';
 
 export const AuthContext = createContext<AuthContextType | null>(null);
 

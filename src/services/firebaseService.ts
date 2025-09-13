@@ -14,7 +14,7 @@ import {
   where,
   Timestamp
 } from 'firebase/firestore';
-import { auth, db } from '../config/firebase';
+import { auth, db } from '../../firebaseConfig.js';
 
 const convertFirestoreTimestampToISOString = (timestamp: any): string => {
   if (timestamp && typeof timestamp.toDate === 'function') {
@@ -179,4 +179,4 @@ export const getAllAppointments = async (): Promise<AppointmentTicket[]> => {
     console.error('Error fetching all appointments:', error);
     throw error;
   }
-}; 
+};
