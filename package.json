@@ -6,8 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview",
-    "vercel-build": "vite build && node copy-vercel-config.js"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@google/genai": "^1.5.1",

@@ -11,16 +11,6 @@
   ],
   "routes": [
     {
-      "src": "/(.+\\.(js|jsx|ts|tsx))$",
-      "headers": { "Content-Type": "application/javascript" },
-      "continue": true
-    },
-    {
-      "src": "/(.+\\.css)$",
-      "headers": { "Content-Type": "text/css" },
-      "continue": true
-    },
-    {
       "src": "/(.*)",
       "dest": "/index.html"
     }
