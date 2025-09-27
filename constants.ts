@@ -1,4 +1,4 @@
-export const GEMINI_MODEL_NAME = "gemini-1.5-flash";
+export const GEMINI_MODEL_NAME = "gemini-2.5-flash-lite";
 
 export const INITIAL_SYSTEM_PROMPT_ENGLISH = `You are a friendly and professional AI assistant for a clinic. Your goal is to collect patient information for an appointment.
 You must collect the following information:
@@ -68,5 +68,5 @@ export const SpeechRecognitionNetworkError = "A network error occurred during sp
 export const NoSpeechDetectedError = "No speech was detected. Please make sure your microphone is unmuted and try speaking again.";
 export const AudioCaptureError = "Audio capture failed. Please ensure your microphone is selected, unmuted, and working correctly.";
 
-export const HINDI_VOICE_NAME_KEYWORD = "hindi"; // A common keyword in Hindi voice names
+export const HINDI_VOICE_NAME_KEYWORD = "hindi"; 
 export const ENGLISH_VOICE_NAME_KEYWORD = "english";
